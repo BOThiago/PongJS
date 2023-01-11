@@ -26,6 +26,7 @@ function draw() {
     mostraRaquete();
     movimentaRaquete();
     verificaColisaoRaquete();
+    limitaAreaRaquete();
 }
 
 function mostraBolinha() {
@@ -64,5 +65,16 @@ function verificaColisaoRaquete() {
         yBolinha - raio < yRaquete + raqueteAltura &&
         yBolinha + raio > yRaquete){
         velocidadeXBolinha *= -1;
+    }
+}
+
+function limitaAreaRaquete() {
+    if (yRaquete < 0) {
+        (keyIsDown(DOWN_ARROW))
+            yRaquete = 0;
+    }
+    if (yRaquete > 310) {
+        (keyIsDown(DOWN_ARROW))
+            yRaquete = 310;
     }
 }
