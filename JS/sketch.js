@@ -27,6 +27,7 @@ function draw() {
     movimentaRaquete();
     verificaColisaoRaquete();
     limitaAreaRaquete();
+    recomecarJogo();
 }
 
 function mostraBolinha() {
@@ -78,3 +79,31 @@ function limitaAreaRaquete() {
             yRaquete = 310;
     }
 }
+
+async function recomecarJogo() {
+    if (xBolinha < 10 || xBolinha > 590) {
+        yBolinha = 200;
+        xBolinha = 300;
+        wait(5000); 
+        } 
+}
+
+/*async function f1() {
+    var x = await tempoDeEspera(10);
+}
+f1();
+
+function tempoDeEspera(x) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(x);
+        if (xBolinha < 10) {
+            xBolinha = 300;
+        } 
+
+        if (xBolinha < 10) {
+            yBolinha = 200;
+        }
+      }, 2000); 
+    });
+  }*/
