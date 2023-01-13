@@ -1,4 +1,3 @@
-
 //Variáveis da bolinha
 let xBolinha = 300;
 let yBolinha = 200;
@@ -28,6 +27,7 @@ function draw() {
     verificaColisaoRaquete();
     limitaAreaRaquete();
     recomecarJogo();
+    bolinhaNaoFicaPresa();
 }
 
 function mostraBolinha() {
@@ -88,11 +88,16 @@ async function recomecarJogo() {
         } 
 }
 
+function bolinhaNaoFicaPresa(){
+    if (XBolinha - raio < 0){
+    XBolinha = 23
+    }
+}
+
 /*async function f1() {
     var x = await tempoDeEspera(10);
 }
 f1();
-
 function tempoDeEspera(x) {
     return new Promise(resolve => {
       setTimeout(() => {
@@ -100,7 +105,6 @@ function tempoDeEspera(x) {
         if (xBolinha < 10) {
             xBolinha = 300;
         } 
-
         if (xBolinha < 10) {
             yBolinha = 200;
         }
