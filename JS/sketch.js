@@ -1,3 +1,10 @@
+//Varíavel de estética
+let imagemPong;
+
+function preload(){
+    imagemPong = loadImage("/images/ponground.png");
+}
+
 //Variáveis da bolinha
 let xBolinha = 300;
 let yBolinha = 200;
@@ -25,7 +32,7 @@ let velocidadeYOponente;
 let colidiu = false;
 
 function draw() {
-    background(0);
+    background(imagemPong);
     mostraBolinha();
     movimentaBolinha();
     verificaColisaoBorda();
@@ -35,7 +42,8 @@ function draw() {
     movimentaRaqueteOponente();
     verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente);
     verificaColisaoRaquete(xRaquete, yRaquete);
-    limitaAreaRaquete();
+    limitaAreaRaquete(xRaquete, yRaquete)
+    limitaAreaRaquete(xRaqueteOponente, yRaqueteOponente);
 }
 
 function mostraBolinha() {
@@ -87,7 +95,7 @@ function verificaColisaoRaquete(){
     }
 }
 
-function limitaAreaRaquete() {
+function limitaAreaRaquete(x,y) {
     if (yRaquete < 0) {
         (keyIsDown(DOWN_ARROW))
             yRaquete = 0;
