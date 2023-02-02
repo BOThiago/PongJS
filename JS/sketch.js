@@ -5,6 +5,10 @@ function preload(){
     imagemPong = loadImage("/images/ponground.png");
 }
 
+//placar do jogo
+let meusPontos = 0;
+let pontosDoOponente = 0;
+
 //Variáveis da bolinha
 let xBolinha = 300;
 let yBolinha = 200;
@@ -43,7 +47,29 @@ function draw() {
     verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente);
     verificaColisaoRaquete(xRaquete, yRaquete);
     limitaAreaRaquete(xRaquete, yRaquete)
-    limitaAreaRaquete(xRaqueteOponente, yRaqueteOponente);
+    limitaAreaRaqueteOponente(xRaqueteOponente, yRaqueteOponente);
+    incluiPlacar();
+    marcaPonto();
+}
+
+function incluiPlacar() {
+    stroke(255);
+    textAlign(CENTER);
+    textSize(16);
+    fill(color(0, 0, 255));
+    rect(150, 10, 40, 20);
+    fill(255);
+    text(meusPontos, 170, 26);
+    fill(color(255, 0, 0));
+    rect(450, 10, 40, 20);
+    fill(255);
+    text(pontosDoOponente, 470, 26);
+}
+
+function bolinhaNaoFicaPresa(){
+    if (XBolinha - raio < 0){
+    XBolinha = 23
+    }
 }
 
 function mostraBolinha() {
@@ -54,9 +80,18 @@ function mostraRaquete(x,y) {
     rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
-function movimentaRaqueteOponente() {
-    velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento / 2 - 30;
+/*function movimentaRaqueteOponente() {
+    velocidadeYOponente = yBolinha + 40 - yRaqueteOponente - raqueteComprimento / 2 - 30;
     yRaqueteOponente += velocidadeYOponente
+}*/
+
+function movimentaRaqueteOponente(){
+    if (keyIsDown(UP_ARROW)){
+        yRaqueteOponente -= 10;
+    }
+    if (keyIsDown(DOWN_ARROW)){
+        yRaqueteOponente += 10;
+    }
 }
 
 function movimentaBolinha() {
@@ -65,10 +100,10 @@ function movimentaBolinha() {
 }
 
 function movimentaRaquete() {
-    if (keyIsDown(UP_ARROW)){
+    if (keyIsDown(87)){
         yRaquete -= 10;
     }
-    if (keyIsDown(DOWN_ARROW)){
+    if (keyIsDown(83)){
         yRaquete += 10;
     }
 }
@@ -79,6 +114,15 @@ function verificaColisaoBorda() {
     }
     if (yBolinha + raio > height || yBolinha - raio < 0){
         velocidadeYBolinha *= -1;
+    }
+}
+
+function marcaPonto() {
+    if (xBolinha > 590) {
+        meusPontos += 1;
+    }
+    if (xBolinha < 10) {
+        pontosDoOponente += 1;
     }
 }
 
@@ -103,6 +147,17 @@ function limitaAreaRaquete(x,y) {
     if (yRaquete > 310) {
         (keyIsDown(DOWN_ARROW))
             yRaquete = 310;
+    }
+}
+
+function limitaAreaRaqueteOponente(x,y) {
+    if (yRaqueteOponente < 0) {
+        (keyIsDown(87))
+            yRaqueteOponente = 0;
+    }
+    if (yRaqueteOponente > 310) {
+        (keyIsDown(83))
+            yRaqueteOponente = 310;
     }
 }
 
